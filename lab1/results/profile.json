@@ -1,0 +1,1295 @@
+{
+  "status": "complete_with_quality_findings",
+  "source": {
+    "path": "BoTNeTIoT-L01-v2.csv",
+    "dataset_id": "azalhowaide/iot-dataset-for-intrusion-detection-systems-ids",
+    "source_file": "BoTNeTIoT-L01-v2.csv",
+    "sha256": "e3cb8a91f0fb99afb81fefe55ee04743ed67dd7ec9ea4d119cf2a71c8a1a494d",
+    "bytes": 1678174220,
+    "rows": 7062606,
+    "columns": 27,
+    "column_names": [
+      "MI_dir_L0.1_weight",
+      "MI_dir_L0.1_mean",
+      "MI_dir_L0.1_variance",
+      "H_L0.1_weight",
+      "H_L0.1_mean",
+      "H_L0.1_variance",
+      "HH_L0.1_weight",
+      "HH_L0.1_mean",
+      "HH_L0.1_std",
+      "HH_L0.1_magnitude",
+      "HH_L0.1_radius",
+      "HH_L0.1_covariance",
+      "HH_L0.1_pcc",
+      "HH_jit_L0.1_weight",
+      "HH_jit_L0.1_mean",
+      "HH_jit_L0.1_variance",
+      "HpHp_L0.1_weight",
+      "HpHp_L0.1_mean",
+      "HpHp_L0.1_std",
+      "HpHp_L0.1_magnitude",
+      "HpHp_L0.1_radius",
+      "HpHp_L0.1_covariance",
+      "HpHp_L0.1_pcc",
+      "Device_Name",
+      "Attack",
+      "Attack_subType",
+      "label"
+    ],
+    "download_provenance": {
+      "dataset_id": "azalhowaide/iot-dataset-for-intrusion-detection-systems-ids",
+      "dataset_url": "https://www.kaggle.com/datasets/azalhowaide/iot-dataset-for-intrusion-detection-systems-ids",
+      "source_filename": "BoTNeTIoT-L01-v2.csv",
+      "archive_filename": "BoTNeTIoT-L01-v2.csv.zip",
+      "archive_member": "BoTNeTIoT-L01-v2.csv",
+      "source_bytes": 1678174220,
+      "source_sha256": "e3cb8a91f0fb99afb81fefe55ee04743ed67dd7ec9ea4d119cf2a71c8a1a494d",
+      "download_method": "Kaggle browser download; local ZIP extraction"
+    }
+  },
+  "schema": {
+    "numeric_columns": [
+      "MI_dir_L0.1_weight",
+      "MI_dir_L0.1_mean",
+      "MI_dir_L0.1_variance",
+      "H_L0.1_weight",
+      "H_L0.1_mean",
+      "H_L0.1_variance",
+      "HH_L0.1_weight",
+      "HH_L0.1_mean",
+      "HH_L0.1_std",
+      "HH_L0.1_magnitude",
+      "HH_L0.1_radius",
+      "HH_L0.1_covariance",
+      "HH_L0.1_pcc",
+      "HH_jit_L0.1_weight",
+      "HH_jit_L0.1_mean",
+      "HH_jit_L0.1_variance",
+      "HpHp_L0.1_weight",
+      "HpHp_L0.1_mean",
+      "HpHp_L0.1_std",
+      "HpHp_L0.1_magnitude",
+      "HpHp_L0.1_radius",
+      "HpHp_L0.1_covariance",
+      "HpHp_L0.1_pcc"
+    ],
+    "categorical_columns": [
+      "Device_Name",
+      "Attack",
+      "Attack_subType"
+    ],
+    "label_column": "label",
+    "timestamp_columns": [],
+    "dtypes": {
+      "MI_dir_L0.1_weight": "float64",
+      "MI_dir_L0.1_mean": "float64",
+      "MI_dir_L0.1_variance": "float64",
+      "H_L0.1_weight": "float64",
+      "H_L0.1_mean": "float64",
+      "H_L0.1_variance": "float64",
+      "HH_L0.1_weight": "float64",
+      "HH_L0.1_mean": "float64",
+      "HH_L0.1_std": "float64",
+      "HH_L0.1_magnitude": "float64",
+      "HH_L0.1_radius": "float64",
+      "HH_L0.1_covariance": "float64",
+      "HH_L0.1_pcc": "float64",
+      "HH_jit_L0.1_weight": "float64",
+      "HH_jit_L0.1_mean": "float64",
+      "HH_jit_L0.1_variance": "float64",
+      "HpHp_L0.1_weight": "float64",
+      "HpHp_L0.1_mean": "float64",
+      "HpHp_L0.1_std": "float64",
+      "HpHp_L0.1_magnitude": "float64",
+      "HpHp_L0.1_radius": "float64",
+      "HpHp_L0.1_covariance": "float64",
+      "HpHp_L0.1_pcc": "float64",
+      "Device_Name": "string",
+      "Attack": "string",
+      "Attack_subType": "string",
+      "label": "int64"
+    }
+  },
+  "numeric_stats": [
+    {
+      "column": "MI_dir_L0.1_weight",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 1.0,
+      "max": 8946.99722856496,
+      "mean": 3400.6823171480664,
+      "std": 2897.01164929015
+    },
+    {
+      "column": "MI_dir_L0.1_mean",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 60.0,
+      "max": 1401.993695,
+      "mean": 179.44409350828218,
+      "std": 153.71088744647633
+    },
+    {
+      "column": "MI_dir_L0.1_variance",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 452001.0916,
+      "mean": 19310.62075896216,
+      "std": 26368.439850592247
+    },
+    {
+      "column": "H_L0.1_weight",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 1.0,
+      "max": 8946.99722856496,
+      "mean": 3400.6823339638195,
+      "std": 2897.0116295642724
+    },
+    {
+      "column": "H_L0.1_mean",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 60.0,
+      "max": 1401.993695,
+      "mean": 179.44409324512125,
+      "std": 153.71070463768663
+    },
+    {
+      "column": "H_L0.1_variance",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 452001.0916,
+      "mean": 19310.65549285752,
+      "std": 26368.421853731117
+    },
+    {
+      "column": "HH_L0.1_weight",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 1.0,
+      "max": 7944.98685647648,
+      "mean": 1892.358744372564,
+      "std": 2523.0833918798576
+    },
+    {
+      "column": "HH_L0.1_mean",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 60.0,
+      "max": 1470.0,
+      "mean": 179.2406152448509,
+      "std": 205.90181972141008
+    },
+    {
+      "column": "HH_L0.1_std",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 678.4579625,
+      "mean": 4.41565914606442,
+      "std": 22.436290291950176
+    },
+    {
+      "column": "HH_L0.1_magnitude",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 60.0,
+      "max": 1470.0,
+      "mean": 186.55622244776293,
+      "std": 206.76578592669972
+    },
+    {
+      "column": "HH_L0.1_radius",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 541081.6893,
+      "mean": 1563.5829349975045,
+      "std": 17971.48228680288
+    },
+    {
+      "column": "HH_L0.1_covariance",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": -259668.1923,
+      "max": 406798.3139,
+      "mean": -87.74611681561065,
+      "std": 2206.486478721305
+    },
+    {
+      "column": "HH_L0.1_pcc",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": -1.586467025,
+      "max": 2.656716158,
+      "mean": 0.0030802065920076385,
+      "std": 0.06480883131153477
+    },
+    {
+      "column": "HH_jit_L0.1_weight",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 1.0,
+      "max": 7944.98685647662,
+      "mean": 1892.358744372571,
+      "std": 2523.083391879875
+    },
+    {
+      "column": "HH_jit_L0.1_mean",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.00248446792132345,
+      "max": 1534252756.0,
+      "mean": 749734906.8003516,
+      "std": 745902834.9668083
+    },
+    {
+      "column": "HH_jit_L0.1_variance",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 5.88e+17,
+      "mean": 1.114786070101782e+16,
+      "std": 7.282259238889781e+16
+    },
+    {
+      "column": "HpHp_L0.1_weight",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 1.0,
+      "max": 4594.45537573834,
+      "mean": 136.90828269686597,
+      "std": 651.0637154256211
+    },
+    {
+      "column": "HpHp_L0.1_mean",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 60.0,
+      "max": 1470.0,
+      "mean": 179.23337677808644,
+      "std": 206.14733064716444
+    },
+    {
+      "column": "HpHp_L0.1_std",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 686.3704671,
+      "mean": 1.9126232733744,
+      "std": 20.130188543388364
+    },
+    {
+      "column": "HpHp_L0.1_magnitude",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 60.0,
+      "max": 1470.0,
+      "mean": 184.29614425026867,
+      "std": 207.76799475027818
+    },
+    {
+      "column": "HpHp_L0.1_radius",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": 0.0,
+      "max": 501429.7041,
+      "mean": 925.414379027467,
+      "std": 14633.645473095337
+    },
+    {
+      "column": "HpHp_L0.1_covariance",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": -131297.5299,
+      "max": 140609.4144,
+      "mean": 91.01315951512976,
+      "std": 1976.0085882904928
+    },
+    {
+      "column": "HpHp_L0.1_pcc",
+      "total": 7062606,
+      "missing": 0,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "min": -1.586467025,
+      "max": 2.760701263,
+      "mean": 0.0018451423335501607,
+      "std": 0.05208507842815103
+    }
+  ],
+  "quality": {
+    "nulls_by_column": [
+      {
+        "column": "MI_dir_L0.1_weight",
+        "missing": 0
+      },
+      {
+        "column": "MI_dir_L0.1_mean",
+        "missing": 0
+      },
+      {
+        "column": "MI_dir_L0.1_variance",
+        "missing": 0
+      },
+      {
+        "column": "H_L0.1_weight",
+        "missing": 0
+      },
+      {
+        "column": "H_L0.1_mean",
+        "missing": 0
+      },
+      {
+        "column": "H_L0.1_variance",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_weight",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_mean",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_std",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_magnitude",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_radius",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_covariance",
+        "missing": 0
+      },
+      {
+        "column": "HH_L0.1_pcc",
+        "missing": 0
+      },
+      {
+        "column": "HH_jit_L0.1_weight",
+        "missing": 0
+      },
+      {
+        "column": "HH_jit_L0.1_mean",
+        "missing": 0
+      },
+      {
+        "column": "HH_jit_L0.1_variance",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_weight",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_mean",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_std",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_magnitude",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_radius",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_covariance",
+        "missing": 0
+      },
+      {
+        "column": "HpHp_L0.1_pcc",
+        "missing": 0
+      },
+      {
+        "column": "Device_Name",
+        "missing": 0
+      },
+      {
+        "column": "Attack",
+        "missing": 0
+      },
+      {
+        "column": "Attack_subType",
+        "missing": 0
+      },
+      {
+        "column": "label",
+        "missing": 0
+      }
+    ],
+    "numeric_nonfinite_columns": [],
+    "numeric_domain_metrics": [
+      {
+        "column": "MI_dir_L0.1_variance",
+        "rule": "nonnegative_variance",
+        "tolerance": 0.0,
+        "violations": 0
+      },
+      {
+        "column": "H_L0.1_variance",
+        "rule": "nonnegative_variance",
+        "tolerance": 0.0,
+        "violations": 0
+      },
+      {
+        "column": "HH_jit_L0.1_variance",
+        "rule": "nonnegative_variance",
+        "tolerance": 0.0,
+        "violations": 0
+      },
+      {
+        "column": "HH_L0.1_std",
+        "rule": "nonnegative_std",
+        "tolerance": 0.0,
+        "violations": 0
+      },
+      {
+        "column": "HpHp_L0.1_std",
+        "rule": "nonnegative_std",
+        "tolerance": 0.0,
+        "violations": 0
+      },
+      {
+        "column": "HH_L0.1_pcc",
+        "rule": "correlation_between_minus1_and_1",
+        "tolerance": 1e-12,
+        "violations": 2791
+      },
+      {
+        "column": "HpHp_L0.1_pcc",
+        "rule": "correlation_between_minus1_and_1",
+        "tolerance": 1e-12,
+        "violations": 1844
+      }
+    ],
+    "numeric_domain_examples": [
+      {
+        "source_row": 98150,
+        "column": "HH_L0.1_pcc",
+        "value": 1.19184721799635,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98151,
+        "column": "HH_L0.1_pcc",
+        "value": 1.12688314220868,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98166,
+        "column": "HH_L0.1_pcc",
+        "value": 1.13532834253388,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98174,
+        "column": "HH_L0.1_pcc",
+        "value": 1.1427238111711,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98213,
+        "column": "HH_L0.1_pcc",
+        "value": 1.14970375219144,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98269,
+        "column": "HH_L0.1_pcc",
+        "value": 1.15589111980229,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98612,
+        "column": "HH_L0.1_pcc",
+        "value": 1.00290009853681,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98760,
+        "column": "HH_L0.1_pcc",
+        "value": 1.01219157420228,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 98862,
+        "column": "HH_L0.1_pcc",
+        "value": 1.02068873145013,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 99106,
+        "column": "HH_L0.1_pcc",
+        "value": 1.02908421202496,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6565152,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.010724124,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6581551,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.116897433,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6582269,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.116897433,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6594551,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.116897433,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6595269,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.116897433,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6607552,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.116897433,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6608270,
+        "column": "HpHp_L0.1_pcc",
+        "value": -1.116897433,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6608445,
+        "column": "HpHp_L0.1_pcc",
+        "value": 1.011549998,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6608446,
+        "column": "HpHp_L0.1_pcc",
+        "value": 1.066169785,
+        "rule": "correlation_between_minus1_and_1"
+      },
+      {
+        "source_row": 6608447,
+        "column": "HpHp_L0.1_pcc",
+        "value": 1.108176112,
+        "rule": "correlation_between_minus1_and_1"
+      }
+    ],
+    "duplicates": {
+      "full_row_count_excluding_first_occurrence": 621659,
+      "examples": [
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 3.364724941,
+            "MI_dir_L0.1_mean": 80.13709207,
+            "MI_dir_L0.1_variance": 198.6102851,
+            "H_L0.1_weight": 3.364724941,
+            "H_L0.1_mean": 80.13709207,
+            "H_L0.1_variance": 198.6102851,
+            "HH_L0.1_weight": 1.078068798,
+            "HH_L0.1_mean": 60.0,
+            "HH_L0.1_std": 6.74e-07,
+            "HH_L0.1_magnitude": 84.85281374,
+            "HH_L0.1_radius": 4.55e-13,
+            "HH_L0.1_covariance": 0.0,
+            "HH_L0.1_pcc": 0.0,
+            "HH_jit_L0.1_weight": 1.078068798,
+            "HH_jit_L0.1_mean": 39.08680252,
+            "HH_jit_L0.1_variance": 1119.159125,
+            "HpHp_L0.1_weight": 1.078068798,
+            "HpHp_L0.1_mean": 60.0,
+            "HpHp_L0.1_std": 6.74e-07,
+            "HpHp_L0.1_magnitude": 84.85281374,
+            "HpHp_L0.1_radius": 4.55e-13,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580961,
+            6608398
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 2.933028622,
+            "MI_dir_L0.1_mean": 82.44178808,
+            "MI_dir_L0.1_variance": 169.6197902,
+            "H_L0.1_weight": 2.933028622,
+            "H_L0.1_mean": 82.44178808,
+            "H_L0.1_variance": 169.6197902,
+            "HH_L0.1_weight": 1.210715762,
+            "HH_L0.1_mean": 86.38176179,
+            "HH_L0.1_std": 9.770132991,
+            "HH_L0.1_magnitude": 109.2803542,
+            "HH_L0.1_radius": 97.79285984,
+            "HH_L0.1_covariance": 1.459441766,
+            "HH_L0.1_pcc": 0.032402303,
+            "HH_jit_L0.1_weight": 1.210715762,
+            "HH_jit_L0.1_mean": 26.61092757,
+            "HH_jit_L0.1_variance": 34.75838517,
+            "HpHp_L0.1_weight": 1.064694482,
+            "HpHp_L0.1_mean": 89.99997664,
+            "HpHp_L0.1_std": 0.026474405,
+            "HpHp_L0.1_magnitude": 108.1665331,
+            "HpHp_L0.1_radius": 0.000702778,
+            "HpHp_L0.1_covariance": -1.41e-10,
+            "HpHp_L0.1_pcc": -7.41e-07,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580993,
+            6608430
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 2.085911764,
+            "MI_dir_L0.1_mean": 88.76439864,
+            "MI_dir_L0.1_variance": 35.54133001,
+            "H_L0.1_weight": 2.085911764,
+            "H_L0.1_mean": 88.76439864,
+            "H_L0.1_variance": 35.54133001,
+            "HH_L0.1_weight": 1.0,
+            "HH_L0.1_mean": 90.0,
+            "HH_L0.1_std": 0.0,
+            "HH_L0.1_magnitude": 90.0,
+            "HH_L0.1_radius": 0.0,
+            "HH_L0.1_covariance": 0.0,
+            "HH_L0.1_pcc": 0.0,
+            "HH_jit_L0.1_weight": 1.0,
+            "HH_jit_L0.1_mean": 1534246534.0,
+            "HH_jit_L0.1_variance": 0.0,
+            "HpHp_L0.1_weight": 1.0,
+            "HpHp_L0.1_mean": 90.0,
+            "HpHp_L0.1_std": 0.0,
+            "HpHp_L0.1_magnitude": 90.0,
+            "HpHp_L0.1_radius": 0.0,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580901,
+            6608338
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 3.324554215,
+            "MI_dir_L0.1_mean": 80.38751582,
+            "MI_dir_L0.1_variance": 195.9746733,
+            "H_L0.1_weight": 3.324554215,
+            "H_L0.1_mean": 80.38751582,
+            "H_L0.1_variance": 195.9746733,
+            "HH_L0.1_weight": 1.064763307,
+            "HH_L0.1_mean": 60.0,
+            "HH_L0.1_std": 0.0,
+            "HH_L0.1_magnitude": 84.85281374,
+            "HH_L0.1_radius": 0.0,
+            "HH_L0.1_covariance": 0.0,
+            "HH_L0.1_pcc": 0.0,
+            "HH_jit_L0.1_weight": 1.064763307,
+            "HH_jit_L0.1_mean": 40.3954085,
+            "HH_jit_L0.1_variance": 0.110979508,
+            "HpHp_L0.1_weight": 1.064763307,
+            "HpHp_L0.1_mean": 60.0,
+            "HpHp_L0.1_std": 0.0,
+            "HpHp_L0.1_magnitude": 84.85281374,
+            "HpHp_L0.1_radius": 0.0,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580983,
+            6608420
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 2.287238278,
+            "MI_dir_L0.1_mean": 88.79020258,
+            "MI_dir_L0.1_variance": 34.83031286,
+            "H_L0.1_weight": 2.287238278,
+            "H_L0.1_mean": 88.79020258,
+            "H_L0.1_variance": 34.83031286,
+            "HH_L0.1_weight": 1.065245909,
+            "HH_L0.1_mean": 89.99367903,
+            "HH_L0.1_std": 0.435418447,
+            "HH_L0.1_magnitude": 108.165058,
+            "HH_L0.1_radius": 0.1900748,
+            "HH_L0.1_covariance": -9.92e-06,
+            "HH_L0.1_pcc": -0.000195443,
+            "HH_jit_L0.1_weight": 1.065245909,
+            "HH_jit_L0.1_mean": 41.24267557,
+            "HH_jit_L0.1_variance": 1338004355.0,
+            "HpHp_L0.1_weight": 1.065198652,
+            "HpHp_L0.1_mean": 89.99367875,
+            "HpHp_L0.1_std": 0.435428104,
+            "HpHp_L0.1_magnitude": 108.1650604,
+            "HpHp_L0.1_radius": 0.19008388,
+            "HpHp_L0.1_covariance": -9.94e-06,
+            "HpHp_L0.1_pcc": -0.000195829,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580939,
+            6608376
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 3.323123729,
+            "MI_dir_L0.1_mean": 80.38814896,
+            "MI_dir_L0.1_variance": 195.9678508,
+            "H_L0.1_weight": 3.323123729,
+            "H_L0.1_mean": 80.38814896,
+            "H_L0.1_variance": 195.9678508,
+            "HH_L0.1_weight": 1.064712343,
+            "HH_L0.1_mean": 60.0,
+            "HH_L0.1_std": 0.0,
+            "HH_L0.1_magnitude": 84.85281374,
+            "HH_L0.1_radius": 0.0,
+            "HH_L0.1_covariance": 0.0,
+            "HH_L0.1_pcc": 0.0,
+            "HH_jit_L0.1_weight": 1.064712343,
+            "HH_jit_L0.1_mean": 19697.98959,
+            "HH_jit_L0.1_variance": 30159200000000.0,
+            "HpHp_L0.1_weight": 1.064712343,
+            "HpHp_L0.1_mean": 60.0,
+            "HpHp_L0.1_std": 0.0,
+            "HpHp_L0.1_magnitude": 84.85281374,
+            "HpHp_L0.1_radius": 0.0,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580915,
+            6608352
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 2.273560734,
+            "MI_dir_L0.1_mean": 88.79646554,
+            "MI_dir_L0.1_variance": 34.65753874,
+            "H_L0.1_weight": 2.273560734,
+            "H_L0.1_mean": 88.79646554,
+            "H_L0.1_variance": 34.65753874,
+            "HH_L0.1_weight": 1.060783535,
+            "HH_L0.1_mean": 90.0,
+            "HH_L0.1_std": 0.0,
+            "HH_L0.1_magnitude": 108.1665383,
+            "HH_L0.1_radius": 0.0,
+            "HH_L0.1_covariance": 0.0,
+            "HH_L0.1_pcc": 0.0,
+            "HH_jit_L0.1_weight": 1.060783535,
+            "HH_jit_L0.1_mean": 87913288.12,
+            "HH_jit_L0.1_variance": 1.27e+17,
+            "HpHp_L0.1_weight": 1.060783535,
+            "HpHp_L0.1_mean": 90.0,
+            "HpHp_L0.1_std": 0.0,
+            "HpHp_L0.1_magnitude": 108.1665383,
+            "HpHp_L0.1_radius": 0.0,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580905,
+            6608342
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 4.023717467,
+            "MI_dir_L0.1_mean": 64.65314201,
+            "MI_dir_L0.1_variance": 117.9425298,
+            "H_L0.1_weight": 4.023717467,
+            "H_L0.1_mean": 64.65314201,
+            "H_L0.1_variance": 117.9425298,
+            "HH_L0.1_weight": 1.294190621,
+            "HH_L0.1_mean": 60.0,
+            "HH_L0.1_std": 6.74e-07,
+            "HH_L0.1_magnitude": 84.85281374,
+            "HH_L0.1_radius": 6.43e-13,
+            "HH_L0.1_covariance": 0.0,
+            "HH_L0.1_pcc": 0.0,
+            "HH_jit_L0.1_weight": 1.294190621,
+            "HH_jit_L0.1_mean": 23.52213444,
+            "HH_jit_L0.1_variance": 68389.95592,
+            "HpHp_L0.1_weight": 1.294190621,
+            "HpHp_L0.1_mean": 60.0,
+            "HpHp_L0.1_std": 6.74e-07,
+            "HpHp_L0.1_magnitude": 84.85281374,
+            "HpHp_L0.1_radius": 6.43e-13,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580953,
+            6608390
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 4.928428798,
+            "MI_dir_L0.1_mean": 69.93076262,
+            "MI_dir_L0.1_variance": 199.3028323,
+            "H_L0.1_weight": 4.928428798,
+            "H_L0.1_mean": 69.93076262,
+            "H_L0.1_variance": 199.3028323,
+            "HH_L0.1_weight": 2.210219505,
+            "HH_L0.1_mean": 76.42950413,
+            "HH_L0.1_std": 14.93172857,
+            "HH_L0.1_magnitude": 97.16722236,
+            "HH_L0.1_radius": 222.956518,
+            "HH_L0.1_covariance": 1.48e-14,
+            "HH_L0.1_pcc": 1.47e-09,
+            "HH_jit_L0.1_weight": 2.210219505,
+            "HH_jit_L0.1_mean": 1886.722214,
+            "HH_jit_L0.1_variance": 2872560000000.0,
+            "HpHp_L0.1_weight": 1.999792489,
+            "HpHp_L0.1_mean": 75.00155649,
+            "HpHp_L0.1_std": 14.99999992,
+            "HpHp_L0.1_magnitude": 75.00155649,
+            "HpHp_L0.1_radius": 224.9999976,
+            "HpHp_L0.1_covariance": 0.0,
+            "HpHp_L0.1_pcc": 0.0,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580923,
+            6608360
+          ]
+        },
+        {
+          "occurrences": 7,
+          "values": {
+            "MI_dir_L0.1_weight": 6.625577725,
+            "MI_dir_L0.1_mean": 77.8559548,
+            "MI_dir_L0.1_variance": 216.8435222,
+            "H_L0.1_weight": 6.625577725,
+            "H_L0.1_mean": 77.8559548,
+            "H_L0.1_variance": 216.8435222,
+            "HH_L0.1_weight": 2.793591375,
+            "HH_L0.1_mean": 81.27461094,
+            "HH_L0.1_std": 13.62458284,
+            "HH_L0.1_magnitude": 101.5638353,
+            "HH_L0.1_radius": 185.6319045,
+            "HH_L0.1_covariance": 7.717886895,
+            "HH_L0.1_pcc": 0.568938888,
+            "HH_jit_L0.1_weight": 2.793591375,
+            "HH_jit_L0.1_mean": 10.28628941,
+            "HH_jit_L0.1_variance": 1267.307456,
+            "HpHp_L0.1_weight": 2.62086863,
+            "HpHp_L0.1_mean": 80.72390581,
+            "HpHp_L0.1_std": 13.8649523,
+            "HpHp_L0.1_magnitude": 101.1800364,
+            "HpHp_L0.1_radius": 192.2395032,
+            "HpHp_L0.1_covariance": 8.323393754,
+            "HpHp_L0.1_pcc": 0.600319013,
+            "Device_Name": "Ennio_Doorbell",
+            "Attack": "Normal",
+            "Attack_subType": "Normal",
+            "label": 1
+          },
+          "source_rows": [
+            6580968,
+            6608405
+          ]
+        }
+      ],
+      "warning": "No event ID is provided. Repeated feature rows can represent legitimate repeated traffic; deduplication would drop observations and was not applied."
+    },
+    "label_category_consistency": {
+      "invalid_rows": 0,
+      "sample_rows": [],
+      "rule": "label=1 iff Attack is Normal; label=0 for non-Normal attacks"
+    },
+    "great_expectations": {
+      "implementation": "Great Expectations 1.24.0",
+      "column": "label",
+      "rows_checked": 7062606,
+      "expectations_run": 142,
+      "expectations_succeeded": 142,
+      "expectations_passed": true,
+      "unexpected_values": 0,
+      "rules": [
+        "not null",
+        "in set {0, 1}"
+      ],
+      "negative_control": {
+        "tested": true,
+        "expected_to_fail": true,
+        "failed_as_expected": true,
+        "unexpected_values": 1
+      }
+    },
+    "critical_label_gx": {
+      "implementation": "Great Expectations 1.24.0",
+      "column": "label",
+      "rows_checked": 7062606,
+      "expectations_run": 142,
+      "expectations_succeeded": 142,
+      "expectations_passed": true,
+      "unexpected_values": 0,
+      "rules": [
+        "not null",
+        "in set {0, 1}"
+      ],
+      "negative_control": {
+        "tested": true,
+        "expected_to_fail": true,
+        "failed_as_expected": true,
+        "unexpected_values": 1
+      }
+    }
+  },
+  "categories": {
+    "counts": [
+      {
+        "column": "label",
+        "value": "0",
+        "rows": 6506674
+      },
+      {
+        "column": "label",
+        "value": "1",
+        "rows": 555932
+      },
+      {
+        "column": "Device_Name",
+        "value": "Philips_B120N10_Baby_Monitor",
+        "rows": 1098677
+      },
+      {
+        "column": "Device_Name",
+        "value": "Danmini_Doorbell",
+        "rows": 1018298
+      },
+      {
+        "column": "Device_Name",
+        "value": "SimpleHome_XCS7_1002_WHT_Security_Camera",
+        "rows": 863056
+      },
+      {
+        "column": "Device_Name",
+        "value": "SimpleHome_XCS7_1003_WHT_Security_Camera",
+        "rows": 850826
+      },
+      {
+        "column": "Device_Name",
+        "value": "Provision_PT_838_Security_Camera",
+        "rows": 836891
+      },
+      {
+        "column": "Device_Name",
+        "value": "Ecobee_Thermostat",
+        "rows": 835876
+      },
+      {
+        "column": "Device_Name",
+        "value": "Provision_PT_737E_Security_Camera",
+        "rows": 828260
+      },
+      {
+        "column": "Device_Name",
+        "value": "Samsung_SNH_1011_N_Webcam",
+        "rows": 375222
+      },
+      {
+        "column": "Device_Name",
+        "value": "Ennio_Doorbell",
+        "rows": 355500
+      },
+      {
+        "column": "Attack",
+        "value": "mirai",
+        "rows": 3668402
+      },
+      {
+        "column": "Attack",
+        "value": "gafgyt",
+        "rows": 2838272
+      },
+      {
+        "column": "Attack",
+        "value": "Normal",
+        "rows": 555932
+      },
+      {
+        "column": "Attack_subType",
+        "value": "udp",
+        "rows": 2176365
+      },
+      {
+        "column": "Attack_subType",
+        "value": "tcp",
+        "rows": 859850
+      },
+      {
+        "column": "Attack_subType",
+        "value": "scan",
+        "rows": 793090
+      },
+      {
+        "column": "Attack_subType",
+        "value": "syn",
+        "rows": 733299
+      },
+      {
+        "column": "Attack_subType",
+        "value": "ack",
+        "rows": 643821
+      },
+      {
+        "column": "Attack_subType",
+        "value": "Normal",
+        "rows": 555932
+      },
+      {
+        "column": "Attack_subType",
+        "value": "udpplain",
+        "rows": 523304
+      },
+      {
+        "column": "Attack_subType",
+        "value": "combo",
+        "rows": 515156
+      },
+      {
+        "column": "Attack_subType",
+        "value": "junk",
+        "rows": 261789
+      }
+    ]
+  },
+  "variety": {
+    "structured_columns": 27,
+    "numeric_columns": 23,
+    "categorical_text_columns": 3,
+    "timestamp_columns": 0,
+    "nested_structures": 0,
+    "note": "The file is flat tabular CSV; categorical values are text labels. No JSON or timestamp fields are present."
+  },
+  "formats": {
+    "csv": {
+      "format": "CSV",
+      "bytes": 1678174220,
+      "write_seconds": null,
+      "read_seconds": null,
+      "rows": 7062606,
+      "all_values_equal": null,
+      "method": "original source file; no self-roundtrip claimed"
+    },
+    "parquet": {
+      "format": "Parquet",
+      "bytes": 458856825,
+      "write_seconds": 7.274244299995189,
+      "read_seconds": 0.007592800000566058,
+      "rows": 7062606,
+      "all_values_equal": true,
+      "method": "DuckDB full typed conversion; bidirectional EXCEPT ALL"
+    },
+    "avro": {
+      "format": "Avro",
+      "bytes": 370939358,
+      "write_seconds": 670.6897660000031,
+      "read_seconds": 279.25951799999893,
+      "rows": 7062606,
+      "all_values_equal": true,
+      "method": "streaming typed records; full-row canonical digest"
+    }
+  },
+  "artifacts": {
+    "profile": "profile.json",
+    "numeric_stats": "numeric_stats.csv",
+    "category_counts": "category_counts.csv",
+    "quality_metrics": "quality_metrics.csv",
+    "quality_examples": "quality_examples.csv",
+    "duplicate_examples": "duplicate_examples.csv",
+    "format_profile": "format_profile.csv",
+    "serialization_comparison": "serialization_comparison.csv",
+    "parquet": "C:\\Users\\kisel\\Documents\\GitHub\\ucheba\\kiselev\\big data\\data\\lab1\\ids.parquet",
+    "avro": "C:\\Users\\kisel\\Documents\\GitHub\\ucheba\\kiselev\\big data\\data\\lab1\\ids.avro"
+  },
+  "provenance": {
+    "source_sha256": "e3cb8a91f0fb99afb81fefe55ee04743ed67dd7ec9ea4d119cf2a71c8a1a494d",
+    "module_sha256": "6eadf321ecd142404c4f296153f6694d6c8cfc51c8be8297384dc5f403bdd718",
+    "options": {
+      "threads": 2,
+      "memory_limit": "2GB",
+      "chunk_rows": 50000,
+      "numeric_columns": [
+        "MI_dir_L0.1_weight",
+        "MI_dir_L0.1_mean",
+        "MI_dir_L0.1_variance",
+        "H_L0.1_weight",
+        "H_L0.1_mean",
+        "H_L0.1_variance",
+        "HH_L0.1_weight",
+        "HH_L0.1_mean",
+        "HH_L0.1_std",
+        "HH_L0.1_magnitude",
+        "HH_L0.1_radius",
+        "HH_L0.1_covariance",
+        "HH_L0.1_pcc",
+        "HH_jit_L0.1_weight",
+        "HH_jit_L0.1_mean",
+        "HH_jit_L0.1_variance",
+        "HpHp_L0.1_weight",
+        "HpHp_L0.1_mean",
+        "HpHp_L0.1_std",
+        "HpHp_L0.1_magnitude",
+        "HpHp_L0.1_radius",
+        "HpHp_L0.1_covariance",
+        "HpHp_L0.1_pcc"
+      ],
+      "category_columns": [
+        "Device_Name",
+        "Attack",
+        "Attack_subType"
+      ],
+      "label_column": "label",
+      "formats": [
+        "csv",
+        "parquet",
+        "avro"
+      ],
+      "parquet_compression": "zstd",
+      "avro_codec": "deflate"
+    }
+  }
+}

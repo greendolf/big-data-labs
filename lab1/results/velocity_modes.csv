@@ -1,0 +1,4 @@
+режим,"max wait before run, s","compute budget, s","p95 end-to-alert budget, s",годится для 5s SLA,"max wait, s","max queue/trigger budget, s","notify budget, s"
+hourly batch,3600.0,600,4200,False,,,
+micro-batch every 5 min,,30,330,False,300.0,,
+true streaming,,1,5,True,,2.0,2.0

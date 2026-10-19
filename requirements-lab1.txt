@@ -1,0 +1,10 @@
+jupyter
+nbclient
+nbformat
+pandas
+numpy
+matplotlib
+pyarrow
+great-expectations>=1.0,<2
+fastavro>=1.9,<2
+duckdb>=1.5,<2

@@ -1,0 +1,4 @@
+format,bytes,write_seconds,read_seconds,rows,all_values_equal,method
+CSV,1678174220,,,7062606,,original source file; no self-roundtrip claimed
+Parquet,458856825,7.274244299995189,0.007592800000566058,7062606,True,DuckDB full typed conversion; bidirectional EXCEPT ALL
+Avro,370939358,670.6897660000031,279.25951799999893,7062606,True,streaming typed records; full-row canonical digest

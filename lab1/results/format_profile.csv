@@ -1,0 +1,8 @@
+field,value,note
+timestamp_columns,0,The original header contains no timestamp column.
+numeric_columns,23,"23 engineered numeric features; HH_jit_L0.1_mean is a jitter statistic, not a timestamp."
+categorical_columns,4,"Device_Name, Attack, Attack_subType, and label."
+categorical_text_bytes,264556097,UTF-8 payload bytes across the three categorical text fields; CSV delimiters/quotes excluded.
+categorical_text_share_of_csv_bytes,0.15764519192768914,Lower-bound text payload share; excludes CSV framing and numeric text.
+json_like_categorical_cells,0,"Categorical fields containing brace or bracket delimiters; a screening count, not JSON parsing."
+categorical_values_with_outer_whitespace,0,Text values differing from trim(value); useful format consistency check.

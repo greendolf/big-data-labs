@@ -1,0 +1,10 @@
+# Dataset files stay outside Git
+/data/
+/output/
+
+# Notebook/runtime files
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
