@@ -1,0 +1,13 @@
+{
+  "implementation": "Great Expectations 1.24.1",
+  "rows_checked": 6440947,
+  "expectations_per_batch": 37,
+  "expectations_run": 481,
+  "expectations_succeeded": 455,
+  "unexpected_counts": {
+    "ExpectColumnValuesToBeBetween:HH_L0.1_pcc": 2100,
+    "ExpectColumnValuesToBeBetween:HpHp_L0.1_pcc": 1206
+  },
+  "negative_control_failed_as_expected": true,
+  "known_unexpected_note": "pcc columns legitimately exceed [-1, 1] in the source (documented in Lab 1); rows are kept and reported, not dropped, because the aggregation task does not use pcc."
+}
