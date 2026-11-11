@@ -73,6 +73,25 @@ class SparkPipelineTests(unittest.TestCase):
         tasks = task_metrics(self.event_dir, "app-123", window_ms=(2050, 10_000))
         self.assertEqual(sorted(tasks["task_id"]), [3, 4])
 
+    def test_task_metrics_parses_spark4_v2_zstd_layout(self):
+        """Spark 4 writes eventlog_v2_<app>/events_*.zstd with multi-frame zstd."""
+        import zstandard
+
+        v2_dir = self.event_dir / "eventlog_v2_app-456"
+        v2_dir.mkdir()
+        payload = b"".join(json.dumps(line).encode("utf-8") + b"\n" for line in EVENT_LOG_LINES)
+        split = len(payload) // 2
+        compressor = zstandard.ZstdCompressor()
+        with (v2_dir / "events_1_app-456.zstd").open("wb") as handle:
+            # Two independent zstd frames, like Spark's rolling writer produces.
+            with compressor.stream_writer(handle, closefd=False) as frame:
+                frame.write(payload[:split])
+            with compressor.stream_writer(handle, closefd=False) as frame:
+                frame.write(payload[split:])
+        tasks = task_metrics(self.event_dir, "app-456")
+        self.assertEqual(len(tasks), 4)
+        self.assertEqual(int(tasks["shuffle_read_bytes"].sum()), 10_100_000)
+
     def test_stage_summary_reports_task_skew_ratio(self):
         tasks = task_metrics(self.event_dir, "app-123")
         summary = stage_summary(tasks)

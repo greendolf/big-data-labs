@@ -1,0 +1,10 @@
+Attack_subType,count
+udp,1879643
+scan,793090
+syn,733299
+ack,643821
+tcp,577345
+udpplain,523304
+combo,515156
+Normal,513500
+junk,261789

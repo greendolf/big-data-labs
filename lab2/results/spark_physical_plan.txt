@@ -1,0 +1,62 @@
+=== explain(formatted) ===
+== Physical Plan ==
+AdaptiveSparkPlan (5)
++- HashAggregate (4)
+   +- Exchange (3)
+      +- HashAggregate (2)
+         +- Scan csv  (1)
+
+
+(1) Scan csv 
+Output [6]: [MI_dir_L0.1_mean#1314, H_L0.1_variance#1318, HH_L0.1_magnitude#1322, Device_Name#1336, Attack#1337, Attack_subType#1338]
+Batched: false
+Location: InMemoryFileIndex [file:/C:/Users/kisel/Documents/GitHub/ucheba/kiselev/big data/data/lab2/inputs/ids_cleaned.csv]
+ReadSchema: struct<MI_dir_L0.1_mean:double,H_L0.1_variance:double,HH_L0.1_magnitude:double,Device_Name:string,Attack:string,Attack_subType:string>
+
+(2) HashAggregate
+Input [6]: [MI_dir_L0.1_mean#1314, H_L0.1_variance#1318, HH_L0.1_magnitude#1322, Device_Name#1336, Attack#1337, Attack_subType#1338]
+Keys [3]: [Attack#1337, Attack_subType#1338, Device_Name#1336]
+Functions [4]: [partial_count(1), partial_avg(MI_dir_L0.1_mean#1314), partial_avg(HH_L0.1_magnitude#1322), partial_max(H_L0.1_variance#1318)]
+Aggregate Attributes [6]: [count#1376L, sum#1377, count#1378L, sum#1379, count#1380L, max#1381]
+Results [9]: [Attack#1337, Attack_subType#1338, Device_Name#1336, count#1382L, sum#1383, count#1384L, sum#1385, count#1386L, max#1387]
+
+(3) Exchange
+Input [9]: [Attack#1337, Attack_subType#1338, Device_Name#1336, count#1382L, sum#1383, count#1384L, sum#1385, count#1386L, max#1387]
+Arguments: hashpartitioning(Attack#1337, Attack_subType#1338, Device_Name#1336, 200), ENSURE_REQUIREMENTS, [plan_id=738]
+
+(4) HashAggregate
+Input [9]: [Attack#1337, Attack_subType#1338, Device_Name#1336, count#1382L, sum#1383, count#1384L, sum#1385, count#1386L, max#1387]
+Keys [3]: [Attack#1337, Attack_subType#1338, Device_Name#1336]
+Functions [4]: [count(1), avg(MI_dir_L0.1_mean#1314), avg(HH_L0.1_magnitude#1322), max(H_L0.1_variance#1318)]
+Aggregate Attributes [4]: [count(1)#1371L, avg(MI_dir_L0.1_mean#1314)#1372, avg(HH_L0.1_magnitude#1322)#1373, max(H_L0.1_variance#1318)#1374]
+Results [7]: [Attack#1337, Attack_subType#1338, Device_Name#1336, count(1)#1371L AS rows#1340L, avg(MI_dir_L0.1_mean#1314)#1372 AS mean_MI_dir_mean#1341, avg(HH_L0.1_magnitude#1322)#1373 AS mean_HH_magnitude#1342, max(H_L0.1_variance#1318)#1374 AS max_H_variance#1343]
+
+(5) AdaptiveSparkPlan
+Output [7]: [Attack#1337, Attack_subType#1338, Device_Name#1336, rows#1340L, mean_MI_dir_mean#1341, mean_HH_magnitude#1342, max_H_variance#1343]
+Arguments: isFinalPlan=false
+
+
+
+
+=== explain(extended) ===
+== Parsed Logical Plan ==
+'Aggregate ['Attack, 'Attack_subType, 'Device_Name], ['Attack, 'Attack_subType, 'Device_Name, 'count(1) AS rows#1340, 'avg('`MI_dir_L0.1_mean`) AS mean_MI_dir_mean#1341, 'avg('`HH_L0.1_magnitude`) AS mean_HH_magnitude#1342, 'max('`H_L0.1_variance`) AS max_H_variance#1343]
++- Relation [MI_dir_L0.1_weight#1313,MI_dir_L0.1_mean#1314,MI_dir_L0.1_variance#1315,H_L0.1_weight#1316,H_L0.1_mean#1317,H_L0.1_variance#1318,HH_L0.1_weight#1319,HH_L0.1_mean#1320,HH_L0.1_std#1321,HH_L0.1_magnitude#1322,HH_L0.1_radius#1323,HH_L0.1_covariance#1324,HH_L0.1_pcc#1325,HH_jit_L0.1_weight#1326,HH_jit_L0.1_mean#1327,HH_jit_L0.1_variance#1328,HpHp_L0.1_weight#1329,HpHp_L0.1_mean#1330,HpHp_L0.1_std#1331,HpHp_L0.1_magnitude#1332,HpHp_L0.1_radius#1333,HpHp_L0.1_covariance#1334,HpHp_L0.1_pcc#1335,Device_Name#1336,Attack#1337,... 2 more fields] csv
+
+== Analyzed Logical Plan ==
+Attack: string, Attack_subType: string, Device_Name: string, rows: bigint, mean_MI_dir_mean: double, mean_HH_magnitude: double, max_H_variance: double
+Aggregate [Attack#1337, Attack_subType#1338, Device_Name#1336], [Attack#1337, Attack_subType#1338, Device_Name#1336, count(1) AS rows#1340L, avg(MI_dir_L0.1_mean#1314) AS mean_MI_dir_mean#1341, avg(HH_L0.1_magnitude#1322) AS mean_HH_magnitude#1342, max(H_L0.1_variance#1318) AS max_H_variance#1343]
++- Relation [MI_dir_L0.1_weight#1313,MI_dir_L0.1_mean#1314,MI_dir_L0.1_variance#1315,H_L0.1_weight#1316,H_L0.1_mean#1317,H_L0.1_variance#1318,HH_L0.1_weight#1319,HH_L0.1_mean#1320,HH_L0.1_std#1321,HH_L0.1_magnitude#1322,HH_L0.1_radius#1323,HH_L0.1_covariance#1324,HH_L0.1_pcc#1325,HH_jit_L0.1_weight#1326,HH_jit_L0.1_mean#1327,HH_jit_L0.1_variance#1328,HpHp_L0.1_weight#1329,HpHp_L0.1_mean#1330,HpHp_L0.1_std#1331,HpHp_L0.1_magnitude#1332,HpHp_L0.1_radius#1333,HpHp_L0.1_covariance#1334,HpHp_L0.1_pcc#1335,Device_Name#1336,Attack#1337,... 2 more fields] csv
+
+== Optimized Logical Plan ==
+Aggregate [Attack#1337, Attack_subType#1338, Device_Name#1336], [Attack#1337, Attack_subType#1338, Device_Name#1336, count(1) AS rows#1340L, avg(MI_dir_L0.1_mean#1314) AS mean_MI_dir_mean#1341, avg(HH_L0.1_magnitude#1322) AS mean_HH_magnitude#1342, max(H_L0.1_variance#1318) AS max_H_variance#1343]
++- Project [MI_dir_L0.1_mean#1314, H_L0.1_variance#1318, HH_L0.1_magnitude#1322, Device_Name#1336, Attack#1337, Attack_subType#1338]
+   +- Relation [MI_dir_L0.1_weight#1313,MI_dir_L0.1_mean#1314,MI_dir_L0.1_variance#1315,H_L0.1_weight#1316,H_L0.1_mean#1317,H_L0.1_variance#1318,HH_L0.1_weight#1319,HH_L0.1_mean#1320,HH_L0.1_std#1321,HH_L0.1_magnitude#1322,HH_L0.1_radius#1323,HH_L0.1_covariance#1324,HH_L0.1_pcc#1325,HH_jit_L0.1_weight#1326,HH_jit_L0.1_mean#1327,HH_jit_L0.1_variance#1328,HpHp_L0.1_weight#1329,HpHp_L0.1_mean#1330,HpHp_L0.1_std#1331,HpHp_L0.1_magnitude#1332,HpHp_L0.1_radius#1333,HpHp_L0.1_covariance#1334,HpHp_L0.1_pcc#1335,Device_Name#1336,Attack#1337,... 2 more fields] csv
+
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[Attack#1337, Attack_subType#1338, Device_Name#1336], functions=[count(1), avg(MI_dir_L0.1_mean#1314), avg(HH_L0.1_magnitude#1322), max(H_L0.1_variance#1318)], output=[Attack#1337, Attack_subType#1338, Device_Name#1336, rows#1340L, mean_MI_dir_mean#1341, mean_HH_magnitude#1342, max_H_variance#1343])
+   +- Exchange hashpartitioning(Attack#1337, Attack_subType#1338, Device_Name#1336, 200), ENSURE_REQUIREMENTS, [plan_id=738]
+      +- HashAggregate(keys=[Attack#1337, Attack_subType#1338, Device_Name#1336], functions=[partial_count(1), partial_avg(MI_dir_L0.1_mean#1314), partial_avg(HH_L0.1_magnitude#1322), partial_max(H_L0.1_variance#1318)], output=[Attack#1337, Attack_subType#1338, Device_Name#1336, count#1382L, sum#1383, count#1384L, sum#1385, count#1386L, max#1387])
+         +- FileScan csv [MI_dir_L0.1_mean#1314,H_L0.1_variance#1318,HH_L0.1_magnitude#1322,Device_Name#1336,Attack#1337,Attack_subType#1338] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/C:/Users/kisel/Documents/GitHub/ucheba/kiselev/big data/data/lab..., PartitionFilters: [], PushedFilters: [], ReadSchema: struct<MI_dir_L0.1_mean:double,H_L0.1_variance:double,HH_L0.1_magnitude:double,Device_Name:string...
+

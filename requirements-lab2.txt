@@ -10,4 +10,5 @@ polars
 duckdb>=1.5,<2
 pyspark>=4,<5
 pyarrow
+zstandard
 great-expectations>=1.0,<2

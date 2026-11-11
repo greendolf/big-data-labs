@@ -108,6 +108,17 @@ def main() -> None:
     from jupyter_client.kernelspec import KernelSpecManager
     from nbclient import NotebookClient
 
+    class ProgressClient(NotebookClient):
+        """Echo kernel stream output so a long headless run stays visible."""
+
+        def output(self, outs, msg, display_id, cell_index):
+            out = super().output(outs, msg, display_id, cell_index)
+            if out is not None and out.get("output_type") == "stream":
+                for line in out.get("text", "").splitlines():
+                    if line.strip():
+                        print(f"[kernel] {line}", flush=True)
+            return out
+
     notebook_path = root / "lab2" / "lab2_engines_benchmark.ipynb"
     notebook = nbformat.read(notebook_path, as_version=4)
     nbformat.validate(notebook)
@@ -129,16 +140,43 @@ def main() -> None:
             kernel_name="lab2",
             kernel_spec_manager=KernelSpecManager(kernel_dirs=[kernel_root]),
         )
-        client = NotebookClient(
+        client = ProgressClient(
             notebook, km=manager, timeout=args.timeout, allow_errors=False,
             resources={"metadata": {"path": str(root)}},
         )
+
+        original_execute_cell = client.execute_cell
+        code_total = sum(cell.cell_type == "code" for cell in notebook.cells)
+        cell_counter = {"n": 0}
+
+        def run_cell_with_progress(cell, *args, **kwargs):
+            if cell.cell_type == "code":
+                cell_counter["n"] += 1
+                source = cell.source.splitlines()
+                first = next((line.strip() for line in source
+                              if line.strip() and not line.strip().startswith("#")), "")
+                print(f"[cell {cell_counter['n']}/{code_total}] {first[:80]}", flush=True)
+            return original_execute_cell(cell, *args, **kwargs)
+
+        client.execute_cell = run_cell_with_progress
+        stop_heartbeat = __import__("threading").Event()
+
+        def heartbeat() -> None:
+            import time as _time
+
+            started = _time.time()
+            while not stop_heartbeat.wait(60):
+                print(f"[runner] elapsed {_time.time() - started:,.0f} s", flush=True)
+
+        heartbeat_thread = __import__("threading").Thread(target=heartbeat, daemon=True)
+        heartbeat_thread.start()
         try:
             client.execute()
         except Exception:
             nbformat.write(notebook, runtime / "failed_execution.ipynb")
             raise
         finally:
+            stop_heartbeat.set()
             if manager.has_kernel:
                 manager.shutdown_kernel(now=True)
 

@@ -161,41 +161,60 @@ def plan_stats(plan: str) -> dict[str, int]:
     }
 
 
-def _event_log_path(event_dir: Path, app_id: str) -> Path | None:
+def _event_log_lines(event_dir: Path, app_id: str):
+    """Yield JSONL event lines for an application from either event-log layout.
+
+    Spark 3.x writes one JSONL file named after the app id (with an
+    ``in_progress_`` prefix until shutdown). Spark 4.x writes a v2 directory
+    ``eventlog_v2_<app_id>/events_*.zstd`` with zstd-compressed JSONL shards.
+    """
     for name in (app_id, f"in_progress_{app_id}"):
         candidate = event_dir / name
         if candidate.is_file():
-            return candidate
-    return None
+            with candidate.open("r", encoding="utf-8") as handle:
+                yield from handle
+            return
+    v2_dir = event_dir / f"eventlog_v2_{app_id}"
+    shards = sorted(v2_dir.glob("events_*")) if v2_dir.is_dir() else []
+    if not shards:
+        raise FileNotFoundError(f"No event log for application {app_id} in {event_dir}")
+    import io
+
+    import zstandard
+
+    for shard in shards:
+        raw = shard.read_bytes()
+        if shard.suffix == ".zstd":
+            reader = zstandard.ZstdDecompressor().stream_reader(io.BytesIO(raw))
+            with reader:
+                raw = reader.read()
+        with io.TextIOWrapper(io.BytesIO(raw), encoding="utf-8") as handle:
+            yield from handle
 
 
 def task_metrics(event_dir: Path, app_id: str, window_ms: tuple[int, int] | None = None) -> pd.DataFrame:
     """Parse TaskEnd metrics from the Spark event log, optionally within a time window."""
-    path = _event_log_path(event_dir, app_id)
-    if path is None:
-        raise FileNotFoundError(f"No event log for application {app_id} in {event_dir}")
     rows: list[dict[str, Any]] = []
-    with path.open("r", encoding="utf-8") as handle:
-        for line in handle:
-            if '"SparkListenerTaskEnd"' not in line:
-                continue
-            event = json.loads(line)
-            metrics = event.get("Task Metrics") or {}
-            info = event.get("Task Info") or {}
-            finish = int(info.get("Finish Time", 0))
-            if window_ms and not (window_ms[0] <= finish <= window_ms[1]):
-                continue
-            rows.append({
-                "stage_id": int(event.get("Stage ID", -1)),
-                "task_id": int(info.get("Task ID", -1)),
-                "duration_ms": max(0, int(info.get("Finish Time", 0)) - int(info.get("Launch Time", 0))),
-                "shuffle_read_bytes": int(metrics.get("Shuffle Read Metrics", {}).get("Remote Bytes Read", 0))
-                + int(metrics.get("Shuffle Read Metrics", {}).get("Local Bytes Read", 0)),
-                "shuffle_write_bytes": int(metrics.get("Shuffle Write Metrics", {}).get("Shuffle Bytes Written", 0)),
-                "input_bytes": int(metrics.get("Input Metrics", {}).get("Bytes Read", 0)),
-                "output_metrics_records": int(metrics.get("Output Metrics", {}).get("Records Written", 0)),
-                "records_read": int(metrics.get("Input Metrics", {}).get("Records Read", 0)),
-            })
+    for line in _event_log_lines(event_dir, app_id):
+        if '"SparkListenerTaskEnd"' not in line:
+            continue
+        event = json.loads(line)
+        metrics = event.get("Task Metrics") or {}
+        info = event.get("Task Info") or {}
+        finish = int(info.get("Finish Time", 0))
+        if window_ms and not (window_ms[0] <= finish <= window_ms[1]):
+            continue
+        rows.append({
+            "stage_id": int(event.get("Stage ID", -1)),
+            "task_id": int(info.get("Task ID", -1)),
+            "duration_ms": max(0, int(info.get("Finish Time", 0)) - int(info.get("Launch Time", 0))),
+            "shuffle_read_bytes": int(metrics.get("Shuffle Read Metrics", {}).get("Remote Bytes Read", 0))
+            + int(metrics.get("Shuffle Read Metrics", {}).get("Local Bytes Read", 0)),
+            "shuffle_write_bytes": int(metrics.get("Shuffle Write Metrics", {}).get("Shuffle Bytes Written", 0)),
+            "input_bytes": int(metrics.get("Input Metrics", {}).get("Bytes Read", 0)),
+            "output_metrics_records": int(metrics.get("Output Metrics", {}).get("Records Written", 0)),
+            "records_read": int(metrics.get("Input Metrics", {}).get("Records Read", 0)),
+        })
     return pd.DataFrame(rows)
 
 
@@ -336,6 +355,11 @@ def _last_stage_summary(tasks: pd.DataFrame) -> pd.DataFrame:
     return stage_summary(tasks)
 
 
+def _progress(message: str) -> None:
+    """Live progress line for the runner log (kernel stdout is forwarded live)."""
+    print(f"[spark-progress] {message}", flush=True)
+
+
 def run_spark_sizes(spark: SparkSession, event_dir: Path, app_id: str,
                     inputs: dict[str, Path], results_dir: Path,
                     warmups: int = 1, runs: int = 3) -> pd.DataFrame:
@@ -346,7 +370,11 @@ def run_spark_sizes(spark: SparkSession, event_dir: Path, app_id: str,
         def action(path: Path = path) -> pd.DataFrame:
             return result_pandas(aggregate_df(read_csv(spark, path)))
 
+        _progress(f"size={label} ({path.stat().st_size/1e6:,.0f} MB) start "
+                  f"warmup={warmups} runs={runs}")
         stats = repeated_run(action, warmups=warmups, runs=runs)
+        _progress(f"size={label} median={stats['wall_seconds_median']:.2f}s "
+                  f"peakRSS={stats['peak_rss_tree_mb']/1000:.2f}GB")
         window = stats["windows"][-1] if stats["windows"] else None
         tasks = task_metrics(event_dir, app_id, window)
         stages = _last_stage_summary(tasks)
@@ -377,6 +405,7 @@ def analyze_physical_plan(spark: SparkSession, event_dir: Path, app_id: str,
                           csv_path: Path, results_dir: Path) -> dict[str, Any]:
     """Part 3: dump explain() plans and the stage/task profile of one real run."""
     results_dir.mkdir(parents=True, exist_ok=True)
+    _progress(f"physical plan on {csv_path.name}: explain + 1 timed run")
     df = read_csv(spark, csv_path)
     result = aggregate_df(df)
     plan_formatted = physical_plan(result, mode="formatted")
@@ -405,6 +434,7 @@ def skew_experiment(spark: SparkSession, event_dir: Path, app_id: str,
                     runs: int = 3) -> dict[str, Any]:
     """Part 4: key-distribution stats plus baseline vs salted timing and plans."""
     results_dir.mkdir(parents=True, exist_ok=True)
+    _progress(f"skew: key distributions for {KEY_COLUMNS} + composite")
     distributions: dict[str, pd.DataFrame] = {}
     statistics_by_column: dict[str, dict[str, float]] = {}
     for column in KEY_COLUMNS:
@@ -418,7 +448,9 @@ def skew_experiment(spark: SparkSession, event_dir: Path, app_id: str,
     composite.to_csv(results_dir / "key_distribution_composite.csv", index=False)
     statistics_by_column["composite_key"] = skew_statistics(composite["count"])
 
+    _progress(f"skew: baseline timing ({runs} runs on cached frame)")
     baseline_stats = repeated_run(lambda: result_pandas(aggregate_df(parsed_df)), runs=runs)
+    _progress(f"skew: salted timing ({buckets} salts, {runs} runs)")
     salted_stats = repeated_run(
         lambda: result_pandas(salted_aggregate(parsed_df, buckets=buckets)), runs=runs
     )
@@ -483,6 +515,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
         return result_pandas(aggregate_df(df))
 
     group_a_rows: list[dict[str, Any]] = []
+    _progress("opt A: a_baseline_csv (full cycle, warmup+runs)")
     base_a = repeated_run(action_csv, runs=runs, keep_result=False)
     group_a_rows.append({
         "id": "a_baseline_csv", "group": "A (uncached end-to-end)",
@@ -497,6 +530,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
          action_parquet_pruned, 3),
     ):
         variant_id, description, action, effort = spec
+        _progress(f"opt A: {variant_id}")
         stats = repeated_run(action, runs=runs, keep_result=False)
         group_a_rows.append({
             "id": variant_id, "group": "A (uncached end-to-end)", "description": description,
@@ -509,6 +543,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
         return result_pandas(aggregate_df(cached_df))
 
     group_b_rows: list[dict[str, Any]] = []
+    _progress("opt B: b_baseline_cached")
     base_b = repeated_run(action_cached, warmups=0, runs=runs, keep_result=False)
     group_b_rows.append({
         "id": "b_baseline_cached", "group": "B (cached parsed CSV)",
@@ -518,6 +553,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
         "effort": 0, "reference": "b_baseline_cached",
     })
     with session_confs(spark, {"spark.sql.adaptive.enabled": "false"}):
+        _progress("opt B: b_aqe_off")
         stats = repeated_run(action_cached, warmups=0, runs=runs, keep_result=False)
     group_b_rows.append({
         "id": "b_aqe_off", "group": "B (cached parsed CSV)",
@@ -528,6 +564,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
     })
     sweep: list[dict[str, Any]] = []
     for partitions in partition_sweep:
+        _progress(f"opt B: sweep shuffle.partitions={partitions}")
         with session_confs(spark, {"spark.sql.shuffle.partitions": str(partitions),
                                    "spark.default.parallelism": str(partitions)}):
             stats = repeated_run(action_cached, warmups=0, runs=runs, keep_result=False)
@@ -553,6 +590,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
         df = cached_df.repartition(best_partitions, *KEY_COLUMNS)
         return result_pandas(aggregate_df(df))
 
+    _progress("opt B: b_repartition_keys")
     stats = repeated_run(action_repartition, warmups=0, runs=runs, keep_result=False)
     group_b_rows.append({
         "id": "b_repartition_keys", "group": "B (cached parsed CSV)",
@@ -564,6 +602,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
 
     iterations = []
     df_iter = read_csv(spark, csv_path).cache()
+    _progress("opt B: b_cache_iteration (cache materialization + 2 queries)")
     try:
         first = timed(lambda: result_pandas(aggregate_df(df_iter)))
         second = timed(lambda: result_pandas(aggregate_df(df_iter)))
@@ -580,6 +619,7 @@ def optimization_matrix(spark: SparkSession, csv_path: Path, parquet_path: Path,
         "first_query_with_cache_seconds": iterations[0],
     })
 
+    _progress(f"opt C: combination (parquet+pruned, partitions={best_partitions})")
     with session_confs(spark, {"spark.sql.shuffle.partitions": str(best_partitions),
                                "spark.default.parallelism": str(best_partitions)}):
         combo_stats = repeated_run(action_parquet_pruned, runs=runs, keep_result=False)

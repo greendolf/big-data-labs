@@ -1,0 +1,77 @@
+== Physical Plan ==
+AdaptiveSparkPlan (12)
++- HashAggregate (11)
+   +- Exchange (10)
+      +- HashAggregate (9)
+         +- HashAggregate (8)
+            +- Exchange (7)
+               +- HashAggregate (6)
+                  +- Project (5)
+                     +- InMemoryTableScan (1)
+                           +- InMemoryRelation (2)
+                                 +- * Project (4)
+                                    +- Scan csv  (3)
+
+
+(1) InMemoryTableScan
+Output [6]: [Attack#1445, Attack_subType#1446, Device_Name#1444, HH_L0.1_magnitude#1430, H_L0.1_variance#1426, MI_dir_L0.1_mean#1422]
+Arguments: [Attack#1445, Attack_subType#1446, Device_Name#1444, HH_L0.1_magnitude#1430, H_L0.1_variance#1426, MI_dir_L0.1_mean#1422]
+
+(2) InMemoryRelation
+Arguments: [Attack#1445, Attack_subType#1446, Device_Name#1444, MI_dir_L0.1_mean#1422, HH_L0.1_magnitude#1430, H_L0.1_variance#1426], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) Scan csv 
+Output [6]: [MI_dir_L0.1_mean#1422, H_L0.1_variance#1426, HH_L0.1_magnitude#1430, Device_Name#1444, Attack#1445, Attack_subType#1446]
+Batched: false
+Location: InMemoryFileIndex [file:/C:/Users/kisel/Documents/GitHub/ucheba/kiselev/big data/data/lab2/inputs/ids_cleaned.csv]
+ReadSchema: struct<MI_dir_L0.1_mean:double,H_L0.1_variance:double,HH_L0.1_magnitude:double,Device_Name:string,Attack:string,Attack_subType:string>
+
+(4) Project [codegen id : 1]
+Output [6]: [Attack#1445, Attack_subType#1446, Device_Name#1444, MI_dir_L0.1_mean#1422, HH_L0.1_magnitude#1430, H_L0.1_variance#1426]
+Input [6]: [MI_dir_L0.1_mean#1422, H_L0.1_variance#1426, HH_L0.1_magnitude#1430, Device_Name#1444, Attack#1445, Attack_subType#1446]
+
+(5) Project
+Output [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, MI_dir_L0.1_mean#1422, HH_L0.1_magnitude#1430, H_L0.1_variance#1426, cast((rand(42) * 8.0) as int) AS _salt#4089]
+Input [6]: [Attack#1445, Attack_subType#1446, Device_Name#1444, HH_L0.1_magnitude#1430, H_L0.1_variance#1426, MI_dir_L0.1_mean#1422]
+
+(6) HashAggregate
+Input [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, MI_dir_L0.1_mean#1422, HH_L0.1_magnitude#1430, H_L0.1_variance#1426, _salt#4089]
+Keys [4]: [Attack#1445, Attack_subType#1446, Device_Name#1444, _salt#4089]
+Functions [4]: [partial_count(1), partial_sum(MI_dir_L0.1_mean#1422), partial_sum(HH_L0.1_magnitude#1430), partial_max(H_L0.1_variance#1426)]
+Aggregate Attributes [4]: [count#4221L, sum#4222, sum#4223, max#4224]
+Results [8]: [Attack#1445, Attack_subType#1446, Device_Name#1444, _salt#4089, count#4225L, sum#4226, sum#4227, max#4228]
+
+(7) Exchange
+Input [8]: [Attack#1445, Attack_subType#1446, Device_Name#1444, _salt#4089, count#4225L, sum#4226, sum#4227, max#4228]
+Arguments: hashpartitioning(Attack#1445, Attack_subType#1446, Device_Name#1444, _salt#4089, 200), ENSURE_REQUIREMENTS, [plan_id=2132]
+
+(8) HashAggregate
+Input [8]: [Attack#1445, Attack_subType#1446, Device_Name#1444, _salt#4089, count#4225L, sum#4226, sum#4227, max#4228]
+Keys [4]: [Attack#1445, Attack_subType#1446, Device_Name#1444, _salt#4089]
+Functions [4]: [count(1), sum(MI_dir_L0.1_mean#1422), sum(HH_L0.1_magnitude#1430), max(H_L0.1_variance#1426)]
+Aggregate Attributes [4]: [count(1)#4101L, sum(MI_dir_L0.1_mean#1422)#4102, sum(HH_L0.1_magnitude#1430)#4103, max(H_L0.1_variance#1426)#4104]
+Results [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, count(1)#4101L AS rows#4090L, sum(MI_dir_L0.1_mean#1422)#4102 AS sum_mi#4091, sum(HH_L0.1_magnitude#1430)#4103 AS sum_hh#4092, max(H_L0.1_variance#1426)#4104 AS max_hv#4093]
+
+(9) HashAggregate
+Input [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, rows#4090L, sum_mi#4091, sum_hh#4092, max_hv#4093]
+Keys [3]: [Attack#1445, Attack_subType#1446, Device_Name#1444]
+Functions [4]: [partial_sum(rows#4090L), partial_sum(sum_mi#4091), partial_sum(sum_hh#4092), partial_max(max_hv#4093)]
+Aggregate Attributes [4]: [sum#4213L, sum#4214, sum#4215, max#4216]
+Results [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, sum#4217L, sum#4218, sum#4219, max#4220]
+
+(10) Exchange
+Input [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, sum#4217L, sum#4218, sum#4219, max#4220]
+Arguments: hashpartitioning(Attack#1445, Attack_subType#1446, Device_Name#1444, 200), ENSURE_REQUIREMENTS, [plan_id=2136]
+
+(11) HashAggregate
+Input [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, sum#4217L, sum#4218, sum#4219, max#4220]
+Keys [3]: [Attack#1445, Attack_subType#1446, Device_Name#1444]
+Functions [4]: [sum(rows#4090L), sum(sum_mi#4091), sum(sum_hh#4092), max(max_hv#4093)]
+Aggregate Attributes [4]: [sum(rows#4090L)#4117L, sum(sum_mi#4091)#4118, sum(sum_hh#4092)#4120, max(max_hv#4093)#4122]
+Results [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, sum(rows#4090L)#4117L AS rows#4105L, (sum(sum_mi#4091)#4118 / cast(sum(rows#4090L)#4117L as double)) AS mean_MI_dir_mean#4106, (sum(sum_hh#4092)#4120 / cast(sum(rows#4090L)#4117L as double)) AS mean_HH_magnitude#4107, max(max_hv#4093)#4122 AS max_H_variance#4108]
+
+(12) AdaptiveSparkPlan
+Output [7]: [Attack#1445, Attack_subType#1446, Device_Name#1444, rows#4105L, mean_MI_dir_mean#4106, mean_HH_magnitude#4107, max_H_variance#4108]
+Arguments: isFinalPlan=false
+
+

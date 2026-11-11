@@ -1,0 +1,4 @@
+stage_id,tasks,wall_ms,task_ms_median,task_ms_max,task_time_skew_ratio,shuffle_read_mb_total,shuffle_read_mb_median_task,shuffle_read_mb_max_task,shuffle_write_mb_total,input_mb_total,variant
+133,200,167,103.0,167.0,1.6213592233009708,0.0,0.0,0.0,10.54,156.59,salted_8
+135,10,84,72.5,84.0,1.1586206896551725,10.54,1.032,1.298,0.07,0.0,salted_8
+138,1,39,39.0,39.0,1.0,0.07,0.073,0.073,0.0,0.0,salted_8
