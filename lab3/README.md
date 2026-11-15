@@ -1,5 +1,7 @@
 # Лабораторная работа 3 — вариант 4
 
+[![Lab3 CI](https://github.com/greendolf/big-data-labs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/greendolf/big-data-labs/actions/workflows/ci.yml)
+
 **Вариант 4 — IoT Sensor Data (датасет BoTNeTIoT-L01-v2), сценарий 3 — Fraud Detection.**
 
 Промышленный ETL/ELT-конвейер: микро-батчи → контракт схемы → построчная валидация с DLQ →
