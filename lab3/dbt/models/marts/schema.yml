@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: "Нормализованные события из raw.events; инкрементальна по idempotency_key"
+    columns:
+      - name: idempotency_key
+        tests: [unique, not_null]
+      - name: device_name
+        tests: [not_null]
+      - name: attack_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Normal', 'mirai', 'gafgyt']
+      - name: label
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+  - name: fct_attack_events
+    description: "Факт атак (только is_attack); инкрементален по idempotency_key"
+    columns:
+      - name: idempotency_key
+        tests: [unique, not_null]
+      - name: device_name
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_device_profile')
+                field: device_name
+      - name: severity
+        tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+  - name: dim_device_profile
+    description: "Профиль устройства: доля атак, доминирующий подтип, риск-скор"
+    columns:
+      - name: device_name
+        tests: [unique, not_null]
+      - name: attack_rate
+        tests:
+          - not_null

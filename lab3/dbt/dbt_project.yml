@@ -1,0 +1,27 @@
+name: lab3_fraud
+profile: lab3_duckdb
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  lab3_fraud:
+    staging:
+      +schema: staging
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
+      fct_attack_events:
+        +materialized: incremental
+
+snapshots:
+  lab3_fraud:
+    +strategy: check
+    +check_cols: [events, attacks, attack_rate]

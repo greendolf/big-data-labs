@@ -1,0 +1,13 @@
+lab3_duckdb:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('DBT_LAB3_WAREHOUSE') }}"
+      schema: dbt
+      threads: 2
+    canary:
+      type: duckdb
+      path: "{{ env_var('DBT_LAB3_WAREHOUSE') }}"
+      schema: "{{ env_var('DBT_CANARY_SCHEMA', 'dbt_canary') }}"
+      threads: 2

@@ -1,0 +1,12 @@
+{
+  "actions": [],
+  "id": "3627eb0e-877f-45dd-bcbd-6fa218013c57",
+  "name": "batch_checkpoint",
+  "result_format": "SUMMARY",
+  "validation_definitions": [
+    {
+      "id": "ea61c7ef-75ce-42d9-91e0-7dc698df9be8",
+      "name": "batch_checkpoint__vd"
+    }
+  ]
+}

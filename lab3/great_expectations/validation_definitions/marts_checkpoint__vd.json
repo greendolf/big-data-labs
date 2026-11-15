@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "24999705-667e-4c21-9100-5607c26e8718",
+      "name": "batches"
+    },
+    "batch_definition": {
+      "id": "9892400c-f560-4ab7-a893-24e3f13aded7",
+      "name": "whole_batch"
+    },
+    "datasource": {
+      "id": "449498ce-f53f-487e-8f17-3236a47987dc",
+      "name": "fraud_batches"
+    }
+  },
+  "id": "64cf260e-5a2f-4f0b-aa0b-fbf505a39ef4",
+  "name": "marts_checkpoint__vd",
+  "suite": {
+    "id": "c5aa4e00-a904-435d-8657-e4328ad63bb9",
+    "name": "fraud_marts_quality"
+  }
+}

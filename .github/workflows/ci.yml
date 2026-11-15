@@ -1,0 +1,39 @@
+name: Lab3 CI
+
+on:
+  push:
+    paths:
+      - "lab3/**"
+      - "requirements-lab3*"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "lab3/**"
+      - "requirements-lab3*"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies (locked)
+        run: |
+          uv venv --python 3.12
+          if [ -f requirements-lab3.linux.lock.txt ]; then
+            uv pip install --python .venv/bin/python -r requirements-lab3.linux.lock.txt
+          else
+            uv pip install --python .venv/bin/python -r requirements-lab3.txt
+          fi
+
+      - name: Unit tests
+        run: .venv/bin/python -X utf8 -m unittest discover -s lab3 -p "test_*.py" -v
+
+      - name: Smoke pipeline (synthetic data, end-to-end)
+        run: .venv/bin/python -X utf8 -m lab3.smoke

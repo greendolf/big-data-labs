@@ -8,3 +8,10 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Lab3 runtime artifacts (dbt target/logs, GE uncommitted store)
+lab3/dbt/target/
+lab3/dbt/logs/
+lab3/dbt/dbt_packages/
+lab3/dbt/profiles/.user.yml
+lab3/great_expectations/uncommitted/

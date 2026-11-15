@@ -1,0 +1,58 @@
+{
+  "expectations": [
+    {
+      "id": "2c5c0473-cad1-4295-ad84-6c7abe5002a1",
+      "kwargs": {
+        "column": "device_name"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "9a6afbe8-c537-4ebf-a151-4286e7e63b7b",
+      "kwargs": {
+        "column": "device_name"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "415a995c-445b-4c6b-bf84-3e013c3c2f9b",
+      "kwargs": {
+        "column": "attack_rate",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "547810b0-d075-4aaa-a096-a14830dc6d3f",
+      "kwargs": {
+        "column": "events",
+        "min_value": 1.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "dc15e66c-bd85-4f91-9dd5-ae0c7b873147",
+      "kwargs": {
+        "min_value": 1
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_row_count_to_be_between"
+    }
+  ],
+  "id": "c5aa4e00-a904-435d-8657-e4328ad63bb9",
+  "meta": {
+    "great_expectations_version": "1.25.0"
+  },
+  "name": "fraud_marts_quality",
+  "notes": null
+}

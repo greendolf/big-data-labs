@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "24999705-667e-4c21-9100-5607c26e8718",
+      "name": "batches"
+    },
+    "batch_definition": {
+      "id": "9892400c-f560-4ab7-a893-24e3f13aded7",
+      "name": "whole_batch"
+    },
+    "datasource": {
+      "id": "449498ce-f53f-487e-8f17-3236a47987dc",
+      "name": "fraud_batches"
+    }
+  },
+  "id": "ea61c7ef-75ce-42d9-91e0-7dc698df9be8",
+  "name": "batch_checkpoint__vd",
+  "suite": {
+    "id": "9a7e314e-ef52-42d1-8760-033bc8647c4c",
+    "name": "fraud_batch_raw"
+  }
+}

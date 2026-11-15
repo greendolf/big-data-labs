@@ -1,0 +1,231 @@
+{
+  "expectations": [
+    {
+      "id": "469033f4-b89d-4cc9-9c82-b5a3fb71e8c4",
+      "kwargs": {
+        "column": "Device_Name"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "83257b86-edf7-492e-be93-421d967f5fff",
+      "kwargs": {
+        "column": "Attack"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "a8fb0479-6677-4219-932b-98ae423e99c1",
+      "kwargs": {
+        "column": "Attack_subType"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "7c8374fe-8d03-458f-bc45-d783e351c4dd",
+      "kwargs": {
+        "column": "label"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "0f79efc3-cf7e-4422-ace6-6081bb4170ea",
+      "kwargs": {
+        "column": "event_time"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "d7d87736-57b2-4fb6-8946-4ad578b6b44b",
+      "kwargs": {
+        "column": "label",
+        "value_set": [
+          0,
+          1
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "b7b1e860-b162-41b8-bfff-61e9df57fb19",
+      "kwargs": {
+        "column": "Attack",
+        "value_set": [
+          "Normal",
+          "mirai",
+          "gafgyt"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "97f00167-75c2-40f6-8c93-2f3a289034b3",
+      "kwargs": {
+        "column": "MI_dir_L0.1_weight",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "55264b97-5142-42dd-a99e-01367319dd6f",
+      "kwargs": {
+        "column": "MI_dir_L0.1_variance",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "abee9940-7d5a-40e2-9818-2cfca206425f",
+      "kwargs": {
+        "column": "H_L0.1_weight",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "d16c8be7-2970-4584-9fc4-8a25aa79fc01",
+      "kwargs": {
+        "column": "H_L0.1_variance",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "1e5d30cd-5c1a-4522-8dfe-414f538f3f49",
+      "kwargs": {
+        "column": "HH_L0.1_weight",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "c8e4d029-1095-464d-aad1-fff9334a4f2f",
+      "kwargs": {
+        "column": "HH_L0.1_std",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "7780cd23-6d4b-4e2d-bd80-86d2fa6df356",
+      "kwargs": {
+        "column": "HH_L0.1_magnitude",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "f39e7fac-e1ff-45b1-bfe5-985d6b65b374",
+      "kwargs": {
+        "column": "HH_L0.1_radius",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "554fc5f3-2516-4299-9f20-171514665990",
+      "kwargs": {
+        "column": "HH_jit_L0.1_weight",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "9ff9ac43-dad6-4fd7-967a-bba18b40d22c",
+      "kwargs": {
+        "column": "HH_jit_L0.1_variance",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "0bfb65ea-353b-4fdf-b097-6a432c7d8e6d",
+      "kwargs": {
+        "column": "HpHp_L0.1_weight",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "d2eb0c6a-5db6-4dd1-9843-0b395354ce35",
+      "kwargs": {
+        "column": "HpHp_L0.1_std",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "b24e549f-56e5-43fd-bd48-ee43d00dbde5",
+      "kwargs": {
+        "column": "HpHp_L0.1_magnitude",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "5b4333e3-5158-4473-a022-082463e0735b",
+      "kwargs": {
+        "column": "HpHp_L0.1_radius",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_min_to_be_between"
+    },
+    {
+      "id": "f6c1c278-a96f-43ef-a065-0964e6be1cce",
+      "kwargs": {
+        "min_value": 1
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_row_count_to_be_between"
+    }
+  ],
+  "id": "9a7e314e-ef52-42d1-8760-033bc8647c4c",
+  "meta": {
+    "great_expectations_version": "1.25.0"
+  },
+  "name": "fraud_batch_raw",
+  "notes": null
+}

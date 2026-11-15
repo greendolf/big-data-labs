@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: lake
+    description: "Реестр сырых событий пайплайна (MERGE-загрузка из микро-батчей)"
+    database: warehouse
+    schema: raw
+    tables:
+      - name: events
+        columns:
+          - name: idempotency_key
+            description: "md5 полного кортежа — ключ UPSERT"
