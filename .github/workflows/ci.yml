@@ -22,18 +22,24 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.12"
+          enable-cache: true
 
+      # setup-uv с python-version уже создал и активировал .venv — повторно uv venv не нужен
       - name: Install dependencies (locked)
         run: |
-          uv venv --python 3.12
-          if [ -f requirements-lab3.linux.lock.txt ]; then
-            uv pip install --python .venv/bin/python -r requirements-lab3.linux.lock.txt
-          else
-            uv pip install --python .venv/bin/python -r requirements-lab3.txt
-          fi
+          set -o pipefail
+          LOCK=requirements-lab3.linux.lock.txt
+          [ -f "$LOCK" ] || LOCK=requirements-lab3.txt
+          uv pip install -r "$LOCK" 2>&1 | tee /tmp/install.log
+
+      - name: Show install log on failure (public annotation)
+        if: failure()
+        run: |
+          echo "::error::install failed: $(tail -c 400 /tmp/install.log | tr '\n\r' '  ')"
+          { echo '### install log (tail)'; echo '```'; tail -c 2500 /tmp/install.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Unit tests
-        run: .venv/bin/python -X utf8 -m unittest discover -s lab3 -p "test_*.py" -v
+        run: python -X utf8 -m unittest discover -s lab3 -p "test_*.py" -v
 
       - name: Smoke pipeline (synthetic data, end-to-end)
-        run: .venv/bin/python -X utf8 -m lab3.smoke
+        run: python -X utf8 -m lab3.smoke
