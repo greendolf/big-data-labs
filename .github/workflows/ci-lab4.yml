@@ -41,5 +41,5 @@ jobs:
       - name: Unit tests (DP accountant, monitor, part-8 logic)
         run: python -X utf8 -m unittest discover -s lab4 -p "test_*.py" -v
 
-      - name: Smoke pipeline (synthetic data, end-to-end: Feast+MLflow+FastAPI+drift+DP+part8)
+      - name: "Smoke pipeline (synthetic data, end-to-end: Feast+MLflow+FastAPI+drift+DP+part8)"
         run: python -X utf8 -m lab4.smoke
