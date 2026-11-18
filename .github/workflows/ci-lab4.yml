@@ -1,0 +1,45 @@
+name: Lab4 CI
+
+on:
+  push:
+    paths:
+      - "lab4/**"
+      - "requirements-lab4*"
+      - ".github/workflows/ci-lab4.yml"
+  pull_request:
+    paths:
+      - "lab4/**"
+      - "requirements-lab4*"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      # setup-uv с python-version уже создал и активировал .venv — повторно uv venv не нужен
+      - name: Install dependencies (locked)
+        run: |
+          set -o pipefail
+          LOCK=requirements-lab4.linux.lock.txt
+          [ -f "$LOCK" ] || LOCK=requirements-lab4.txt
+          uv pip install -r "$LOCK" 2>&1 | tee /tmp/install.log
+
+      - name: Show install log on failure (public annotation)
+        if: failure()
+        run: |
+          echo "::error::install failed: $(tail -c 400 /tmp/install.log | tr '\n\r' '  ')"
+          { echo '### install log (tail)'; echo '```'; tail -c 2500 /tmp/install.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Unit tests (DP accountant, monitor, part-8 logic)
+        run: python -X utf8 -m unittest discover -s lab4 -p "test_*.py" -v
+
+      - name: Smoke pipeline (synthetic data, end-to-end: Feast+MLflow+FastAPI+drift+DP+part8)
+        run: python -X utf8 -m lab4.smoke

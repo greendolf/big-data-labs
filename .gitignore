@@ -15,3 +15,11 @@ lab3/dbt/logs/
 lab3/dbt/dbt_packages/
 lab3/dbt/profiles/.user.yml
 lab3/great_expectations/uncommitted/
+
+# Lab4 runtime state (Feast registry/online store, mlflow, сгенерированный фича-пракет)
+lab4/feast_repo/data/
+lab4/feast_repo/online_store.db
+lab4/feast_repo/device_hourly_stats.parquet
+
+# MLflow file-store fallback (probes) - all real state lives in data/lab4/ (ignored)
+mlruns/

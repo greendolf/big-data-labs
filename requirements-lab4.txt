@@ -1,0 +1,28 @@
+# ЛР4 «Интеграция ML-моделей в production» — стек (CPU-only).
+# Прямые зависимости; версии фиксируются отдельно в lock для CI.
+mlflow>=2.16
+feast[duckdb]>=0.49,<0.50
+fastapi>=0.115
+uvicorn>=0.30
+httpx>=0.27
+pydantic>=2.7
+scikit-learn>=1.5
+xgboost>=2.1
+river>=0.21
+evidently>=0.7,<0.8
+statsforecast>=2.0,<3
+# duckdb НЕ пиним явно: feast[duckdb] через ibis-framework требует duckdb<2, и CI
+# (unit + smoke) читает только parquet. Локально ноутбук открывает warehouse.duckdb
+# формата 2.0 — там стоит отдельный duckdb 2.0.0, несовместимый с feast-резолвом CI,
+# поэтому в общий requirements его не выносим.
+pandas>=2.2
+numpy>=1.26,<2.0
+pyarrow>=16
+scipy>=1.13
+joblib>=1.4
+matplotlib>=3.8
+
+# рантайм ноутбука
+ipykernel>=6.29
+nbformat>=5.10
+nbclient>=0.10
